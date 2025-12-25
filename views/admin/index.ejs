@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #343a40;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            
+            padding: 8px;
+            text-align: left;
+        }
+        button {
+            background-color: #37b170;
+            color: #fff;
+            border: none;
+            font-size: 1rem;
+            padding: 5px 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #235489;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Panel <button onclick="location.href='/msgapp/admin/logout'">Logout</button></h1>
+    <h2>Users: <%= userCount %>, Messages: <%= msgCount %></h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Groups</th>
+                
+            </tr>
+        <% users.forEach(function(user) { %>
+            <tr>
+                <td><button onclick="location.href='/msgapp/admin/deleteuser?name=<%= user.name %>'">Remove User</button></td>
+                <td><%= user.name %></td>
+                <td><%= user.phoneNumber %></td>
+                <td><%= user.groups.length > 0 ? user.groups.join(', ') : "No groups" %></td>
+                
+            </tr>
+        <% }); %>
+    </table>
+    <h2>Add User</h2>
+    <p>
+        
+        <form action="/msgapp/admin/adduser" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber">
+            <label for="groups">Groups:</label>
+            <input type="text" id="groups" name="groups">
+            <button type="submit">Add User</button>
+        </form>
+    </p>
+    <p></p>
+</body>
+</html>
