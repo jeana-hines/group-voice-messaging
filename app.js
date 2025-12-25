@@ -41,7 +41,7 @@ startServer();
 
 // Session Middleware
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'eowivnlke2kdls@kdi_mMhoe38',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 day

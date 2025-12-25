@@ -53,7 +53,7 @@
             </tr>
         <% users.forEach(function(user) { %>
             <tr>
-                <td><button onclick="location.href='/msgapp/admin/deleteuser?name=<%= user.name %>'">Remove User</button></td>
+                <td><button onclick="location.href='/msgapp/admin/deleteuser?phoneNumber=<%= user.phoneNumber %>'">Remove User</button></td>
                 <td><%= user.name %></td>
                 <td><%= user.phoneNumber %></td>
                 <td><%= user.groups.length > 0 ? user.groups.join(', ') : "No groups" %></td>

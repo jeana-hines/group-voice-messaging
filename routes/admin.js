@@ -21,7 +21,7 @@ router.get('/login', (req, res) => {
 
 router.post('/login', (req, res) => {
   const { password } = req.body;
-  const correctPassword = process.env.ADMIN_PASSWORD || 'eowivnlke2kdls@kdi_mMhoe38'; 
+  const correctPassword = process.env.ADMIN_PASSWORD; 
   if (password === correctPassword) {
     req.session.authenticated = true;
     res.redirect('./');
@@ -54,16 +54,16 @@ router.post('/adduser', isAdmin, async (req, res) => {
 
 // Admin Delete User
 router.get('/deleteuser', isAdmin, async (req, res) => {
-  const { name } = req.query;
+  const { phoneNumber } = req.query;
     try {
-        const deletedUser = await User.findOneAndDelete({ name: name });
+        const deletedUser = await User.findOneAndDelete({ phoneNumber: phoneNumber });
         if (!deletedUser) {
-            console.log(`User ${name} not found`);
+            console.log(`User ${phoneNumber} not found`);
             return res.redirect('./');
         } else {
-            console.log(`User ${name} deleted successfully`);
+            console.log(`User ${phoneNumber} deleted successfully`);
         }
-        console.log(`User ${name} deleted successfully`);
+        console.log(`User ${phoneNumber} deleted successfully`);
         res.redirect('./');
     } catch (err) {
         console.error(err);
