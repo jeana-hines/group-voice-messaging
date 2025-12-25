@@ -62,7 +62,7 @@ app.use('/admin', adminRoutes);
 // Routes
 app.get('/', (req, res) => res.send('<h1>Voice Exchange is Online</h1>'));
 
-// 1. Main entry point for voice calls
+// Main entry point for voice calls
 app.post(['/voice', '/voice/'], async (req, res) => {
   res.type('text/xml');
   const callerNumber = req.body.From;
@@ -91,7 +91,7 @@ app.post(['/voice', '/voice/'], async (req, res) => {
   } catch (err) { res.send('<Response><Say>Error.</Say><Hangup/></Response>'); }
 });
 
-// 2. MAIN MENU HANDLER
+// Main menu handler
 app.post(['/menu', '/menu/'], async (req, res) => {
   res.type('text/xml');
   const digit = req.body.Digits || req.query.Digits;
@@ -148,7 +148,7 @@ app.post(['/menu', '/menu/'], async (req, res) => {
   }
 });
 
-// 3. ARCHIVE CHOICE HANDLER
+// Archive choice handler
 app.post(['/archive-choice', '/archive-choice/'], async (req, res) => {
   res.type('text/xml');
   const digit = req.body.Digits;
@@ -163,7 +163,7 @@ app.post(['/archive-choice', '/archive-choice/'], async (req, res) => {
   } catch (err) { res.send('<Response><Redirect>/msgapp/voice</Redirect></Response>'); }
 });
 
-// 4. RECORDING LOGIC
+// Recipient selection handler
 app.post(['/select-recipient', '/select-recipient/'], async (req, res) => {
   res.type('text/xml');
   const choice = parseInt(req.body.Digits, 10) - 1;
